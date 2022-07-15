@@ -11,10 +11,14 @@ RSpec.describe Table do
   end
 
   it "2,3 north from 7,7 table is 2,4" do
-    expect(Table.new(7, 7).north_from(Location.new(2, 3))).to eq(Location.new(2, 4))
+    location = Table.new(7, 7).north_from(Location.new(2, 3))
+    expect(location.x_unit).to eq(2)
+    expect(location.y_unit).to eq(4)
   end
 
   it "3,1 south from 3,3 table is 3,1" do
-    expect(Table.new(3, 3).south_from(Location.new(3, 1))).to eq(Location.new(3, 1))
+    location = Table.new(3, 3).north_from(Location.new(3, 1))
+    expect(location.x_unit).to eq(3)
+    expect(location.y_unit).to eq(1)
   end
 end
