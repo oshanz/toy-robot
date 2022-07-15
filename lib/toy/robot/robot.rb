@@ -5,6 +5,8 @@ class Robot
   @headed = nil
 
   def place(x_cord, y_cord, direction)
+    throw "invlid location" unless Location.valid?(x_cord, y_cord)
+
     @location = Location.new(x_cord, y_cord)
     @headed = direction
   end
