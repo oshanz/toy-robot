@@ -1,5 +1,25 @@
 # Toy Robot
 
+
+## How to Setup
+- install gems `bundle install`
+- run `rake spec`
+
+## Approch around Problem solving
+- I've designed it as an API. `robot_spec` is an example of how to use it.
+
+## Approach around testing
+- as the first step, I wrote `robot_spec` so I can design a clear API for the Robot.
+- later improved the code coverage for other classes.
+
+
+## TODO: further improvment
+
+1. reduce lines from `location#move` function
+
+---------------------
+
+
 #### What is this ?
 
 Toy Robot is a ruby coding exercise that we get our potential candidates  complete for us (Mable) to understand their capabilities.  
@@ -111,11 +131,3 @@ In Fact the author of this test himself has described, why this test is still re
 [Toy Robot Coding Puzzle](https://joneaves.wordpress.com/2014/07/21/toy-robot-coding-test/)
 
 All the very best !!!
-
-
--------------------------------------------------
-
-TODO:
-
-1. add more unit tests
-2. data type validations
