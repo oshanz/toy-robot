@@ -1,4 +1,3 @@
-
 class Location
   attr_reader :x_cord, :y_cord
 
@@ -7,7 +6,7 @@ class Location
     @y_cord = y_cord
   end
 
-  def valid?(x_cord, y_cord)
+  def self.valid?(x_cord, y_cord)
     return false if x_cord > 4 || x_cord.negative? # 5x5 box boundries
     return false if y_cord > 4 || y_cord.negative? # 5x5 box boundries
 
@@ -30,7 +29,7 @@ class Location
     else
       throw "can't move, invalid direction"
     end
-    return unless valid?(next_x_cord, next_y_cord) # don't exceed boundries
+    return unless Location.valid?(next_x_cord, next_y_cord) # don't exceed boundries
 
     @x_cord = next_x_cord
     @y_cord = next_y_cord

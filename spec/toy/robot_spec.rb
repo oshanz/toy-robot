@@ -16,7 +16,7 @@ RSpec.describe Toy::Robot do
   it "can turn right" do
     robot = Robot.new
     robot.place(2, 2, Direction::NORTH)
-    robot.turn_right
+    robot.right
     x, y, direction = robot.report
     expect(x).to eq(2)
     expect(y).to eq(2)
@@ -26,7 +26,7 @@ RSpec.describe Toy::Robot do
   it "can turn left" do
     robot = Robot.new
     robot.place(0, 0, Direction::NORTH)
-    robot.turn_left
+    robot.left
     x, y, direction = robot.report
     expect(x).to eq(0)
     expect(y).to eq(0)
@@ -48,7 +48,7 @@ RSpec.describe Toy::Robot do
     robot.place(1, 2, Direction::EAST)
     robot.move
     robot.move
-    robot.turn_left
+    robot.left
     robot.move
     x, y, direction = robot.report
     expect(x).to eq(3)
@@ -60,7 +60,7 @@ RSpec.describe Toy::Robot do
     robot = Robot.new
     robot.place(0, 4, Direction::NORTH)
     robot.move
-    robot.turn_left
+    robot.left
     robot.move
     x, y, direction = robot.report
     expect(x).to eq(0)
@@ -72,7 +72,7 @@ RSpec.describe Toy::Robot do
     robot = Robot.new
     robot.place(4, 0, Direction::EAST)
     robot.move
-    robot.turn_right
+    robot.right
     robot.move
     x, y, direction = robot.report
     expect(x).to eq(4)

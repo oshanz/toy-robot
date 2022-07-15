@@ -1,4 +1,4 @@
-require_relative 'location'
+require_relative "location"
 
 class Robot
   @location = nil
@@ -9,11 +9,11 @@ class Robot
     @headed = direction
   end
 
-  def turn_right
+  def right
     @headed = Direction.right_of(@headed)
   end
 
-  def turn_left
+  def left
     @headed = Direction.left_of(@headed)
   end
 
