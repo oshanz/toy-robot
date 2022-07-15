@@ -16,22 +16,22 @@ class Table
     true
   end
 
-  def north_unit(location)
+  def north_from(location)
     nextlocation = Location.new(location.x_unit, location.y_unit + 1)
     placeable?(nextlocation) ? nextlocation : location
   end
 
-  def south_unit(location)
+  def south_from(location)
     nextlocation = Location.new(location.x_unit, location.y_unit - 1)
     placeable?(nextlocation) ? nextlocation : location
   end
 
-  def west_unit(location)
+  def west_from(location)
     nextlocation = Location.new(location.x_unit - 1, location.y_unit)
     placeable?(nextlocation) ? nextlocation : location
   end
 
-  def east_unit(location)
+  def east_from(location)
     nextlocation = Location.new(location.x_unit + 1, location.y_unit)
     placeable?(nextlocation) ? nextlocation : location
   end
