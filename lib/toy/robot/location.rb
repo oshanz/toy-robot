@@ -7,8 +7,8 @@ class Location
   end
 
   def self.valid?(x_cord, y_cord)
-    return false if x_cord > 4 || x_cord.negative? # 5x5 box boundries
-    return false if y_cord > 4 || y_cord.negative? # 5x5 box boundries
+    return false if x_cord > 4 || x_cord.negative? # 5x5 box boundaries
+    return false if y_cord > 4 || y_cord.negative? # 5x5 box boundaries
 
     true
   end
@@ -29,7 +29,7 @@ class Location
     else
       throw "can't move, invalid direction"
     end
-    return unless Location.valid?(next_x_cord, next_y_cord) # don't exceed boundries
+    return unless Location.valid?(next_x_cord, next_y_cord) # don't exceed boundaries
 
     @x_cord = next_x_cord
     @y_cord = next_y_cord
