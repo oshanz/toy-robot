@@ -111,3 +111,11 @@ In Fact the author of this test himself has described, why this test is still re
 [Toy Robot Coding Puzzle](https://joneaves.wordpress.com/2014/07/21/toy-robot-coding-test/)
 
 All the very best !!!
+
+
+-------------------------------------------------
+
+TODO:
+
+1. add more unit tests
+2. data type validations
