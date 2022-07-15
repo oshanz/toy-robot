@@ -26,21 +26,16 @@ class Robot
   end
 
   def move
-    next_location = nil
-
     case @headed
     when Direction::NORTH
-      next_location = @table.north_from(@location)
+      @location = @table.north_from(@location)
     when Direction::EAST
-      next_location = @table.east_from(@location)
+      @location = @table.east_from(@location)
     when Direction::WEST
-      next_location = @table.west_from(@location)
+      @location = @table.west_from(@location)
     when Direction::SOUTH
-      next_location = @table.south_from(@location)
-    else
-      throw "invlid direction"
+      @location = @table.south_from(@location)
     end
-    @location = next_location
   end
 
   def report
