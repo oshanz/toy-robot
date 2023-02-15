@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require_relative "robot/version"
+require "thor"
+require_relative "robot/table"
+require_relative "robot/robot"
 
 module Toy
   module Robot
@@ -8,3 +11,32 @@ module Toy
     # Your code goes here...
   end
 end
+
+## Toy Robot
+class Play < Thor
+  desc "start", "create a table size x,y"
+  def start(x_unit, y_unit)
+    table = Table.new(x_unit.to_i, y_unit.to_i)
+    @robot = Robot.new(table)
+
+    loop do
+      command = ask("$")
+      place(command) if command.include? "place"
+
+      result = @robot.send(command) if %w[move left right report].include?(command)
+
+      say(result) if command == "report"
+    end
+  end
+
+  private
+
+  def place(command)
+    x = command.delete_prefix("place ").split(",")[0].to_i
+    y = command.delete_prefix("place ").split(",")[1].to_i
+    direction = command.delete_prefix("place ").split(",")[2]
+    @robot.place(x, y, direction)
+  end
+end
+
+Play.start(ARGV)

@@ -1,5 +1,6 @@
 require_relative "location"
 require_relative "table"
+require_relative "direction"
 
 class Robot
   @location = nil
@@ -12,7 +13,9 @@ class Robot
 
   def place(x_unit, y_unit, direction)
     @location = Location.new(x_unit, y_unit)
-    throw "invlid location" unless @table.placeable?(@location)
+    raise "invlid location" unless @table.placeable?(@location)
+    raise "invalid direction" unless [Direction::NORTH, Direction::EAST, Direction::WEST,
+                                      Direction::SOUTH].include?(direction)
 
     @headed = direction
   end
