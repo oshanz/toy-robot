@@ -2,20 +2,25 @@
 
 
 ## How to Setup
-- install gems `bundle install`
-- run `rake spec`
+- docker-compose -f docker-compose.yml build
+- docker-compose -f docker-compose.yml up -d
+### run unit tests
+- docker-compose -f docker-compose.yml exec toy-robot ruby lib/toy/robot.rb
 
-## Approch around Problem solving
+### play with the robot
+
+
+### Approch around Problem solving
 - I've designed it as an API. `robot_spec` is an example of how to use it.
 
-## Approach around testing
+### Approach around testing
 - as the first step, I wrote `robot_spec` so I can design a clear API for the Robot.
 - later improved the code coverage for other classes.
 
-
-## TODO: further improvment
-
-1. reduce lines from `location#move` function
+### todo
+- add help command
+- more validations
+- test api interface
 
 ---------------------
 
