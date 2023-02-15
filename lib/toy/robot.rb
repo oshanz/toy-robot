@@ -12,13 +12,14 @@ module Toy
   end
 end
 
+## Toy Robot
 class Play < Thor
   desc "start", "create a table size x,y"
-  def start(x, y)
-    table = Table.new(x.to_i, y.to_i)
+  def start(x_unit, y_unit)
+    table = Table.new(x_unit.to_i, y_unit.to_i)
     @robot = Robot.new(table)
 
-    while true
+    loop do
       command = ask("$")
       place(command) if command.include? "place"
 
