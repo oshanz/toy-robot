@@ -5,7 +5,7 @@
 - docker-compose -f docker-compose.yml build
 - docker-compose -f docker-compose.yml up -d
 ### run unit tests
-- docker-compose -f docker-compose.yml exec toy-robot ruby lib/toy/robot.rb
+- docker-compose -f docker-compose.yml exec toy-robot rake spec
 
 ### play with the robot
 #### start with a table size 4x4
