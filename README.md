@@ -8,7 +8,8 @@
 - docker-compose -f docker-compose.yml exec toy-robot ruby lib/toy/robot.rb
 
 ### play with the robot
-
+#### start with a table size 4x4
+- docker-compose -f docker-compose.yml exec toy-robot /app/play.rb start 4 4
 
 ### Approch around Problem solving
 - I've designed it as an API. `robot_spec` is an example of how to use it.
@@ -19,8 +20,6 @@
 
 ### todo
 - add help command
-- more validations
-- test api interface
 
 ---------------------
 

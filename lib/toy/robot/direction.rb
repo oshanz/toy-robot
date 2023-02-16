@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Direction
-  NORTH = "north"
-  SOUTH = "south"
-  EAST = "east"
-  WEST = "west"
+  NORTH = "NORTH"
+  SOUTH = "SOUTH"
+  EAST = "EAST"
+  WEST = "WEST"
 
   def self.right_of(direction)
     {
@@ -22,5 +22,9 @@ module Direction
       Direction::SOUTH => Direction::EAST,
       Direction::EAST => Direction::NORTH
     }[direction]
+  end
+
+  def self.valid?(direction)
+    [Direction::NORTH, Direction::EAST, Direction::WEST, Direction::SOUTH].include?(direction)
   end
 end
