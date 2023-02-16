@@ -13,10 +13,6 @@ class Robot
 
   def place(x_unit, y_unit, direction)
     @location = Location.new(x_unit, y_unit)
-    raise "invlid location" unless @table.placeable?(@location)
-    raise "invalid direction" unless [Direction::NORTH, Direction::EAST, Direction::WEST,
-                                      Direction::SOUTH].include?(direction)
-
     @headed = direction
   end
 
@@ -43,5 +39,9 @@ class Robot
 
   def report
     [@location.x_unit, @location.y_unit, @headed]
+  end
+
+  def placed?
+    !@location.nil?
   end
 end
