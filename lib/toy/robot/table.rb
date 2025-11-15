@@ -1,8 +1,7 @@
 require_relative "location"
 
 class Table
-  @width = nil
-  @height = nil
+  attr_reader :width, :height
 
   def initialize(width, height)
     @width = width
@@ -10,29 +9,35 @@ class Table
   end
 
   def placeable?(location)
-    return false if location.x_unit >= @width || location.x_unit.negative? # prevent falling
-    return false if location.y_unit >= @width || location.y_unit.negative? # prevent falling
+    return false if location.x_unit > width
+    return false if location.y_unit > height
+    return false if location.x_unit.negative?
+    return false if location.y_unit.negative?
 
     true
   end
 
   def north_from(location)
-    nextlocation = Location.new(location.x_unit, location.y_unit + 1)
-    placeable?(nextlocation) ? nextlocation : location
+    Location.new(location.x_unit, location.y_unit + 1, self)
+  rescue ValidationError
+    location
   end
 
   def south_from(location)
-    nextlocation = Location.new(location.x_unit, location.y_unit - 1)
-    placeable?(nextlocation) ? nextlocation : location
+    Location.new(location.x_unit, location.y_unit - 1, self)
+  rescue ValidationError
+    location
   end
 
   def west_from(location)
-    nextlocation = Location.new(location.x_unit - 1, location.y_unit)
-    placeable?(nextlocation) ? nextlocation : location
+    Location.new(location.x_unit - 1, location.y_unit, self)
+  rescue ValidationError
+    location
   end
 
   def east_from(location)
-    nextlocation = Location.new(location.x_unit + 1, location.y_unit)
-    placeable?(nextlocation) ? nextlocation : location
+    Location.new(location.x_unit + 1, location.y_unit, self)
+  rescue ValidationError
+    location
   end
 end

@@ -2,23 +2,37 @@ require "toy/robot/table"
 require "toy/robot/location"
 
 RSpec.describe Table do
-  it "2,3 is inside the 4,4 table" do
-    expect(Table.new(4, 4).placeable?(Location.new(2, 3))).to eq(true)
+  it "4,4 can hold 2,3" do
+    table = Table.new(4, 4)
+    location = instance_double(Location, x_unit: 2, y_unit: 3)
+    expect(table.placeable?(location)).to eq(true)
   end
 
-  it "2,3 is not inside the 2,2 table" do
-    expect(Table.new(2, 3).placeable?(Location.new(2, 3))).to eq(false)
+  it "2,2 can't hold 2,3" do
+    table = Table.new(2, 2)
+    location = instance_double(Location, x_unit: 2, y_unit: 3)
+    expect(table.placeable?(location)).to eq(false)
+  end
+
+  it "2,2 can't hold -1,3" do
+    table = Table.new(2, 2)
+    location = instance_double(Location, x_unit: -1, y_unit: 3)
+    expect(table.placeable?(location)).to eq(false)
   end
 
   it "2,3 north from 7,7 table is 2,4" do
-    location = Table.new(7, 7).north_from(Location.new(2, 3))
+    table = Table.new(7, 7)
+    location = instance_double(Location, x_unit: 2, y_unit: 3)
+    location = table.north_from(location)
     expect(location.x_unit).to eq(2)
     expect(location.y_unit).to eq(4)
   end
 
-  it "3,1 south from 3,3 table is 3,1" do
-    location = Table.new(3, 3).north_from(Location.new(3, 1))
+  it "3,3, start 3,1 south is 3,1" do
+    table = Table.new(3, 3)
+    location = instance_double(Location, x_unit: 3, y_unit: 1)
+    location = table.south_from(location)
     expect(location.x_unit).to eq(3)
-    expect(location.y_unit).to eq(1)
+    expect(location.y_unit).to eq(0)
   end
 end
