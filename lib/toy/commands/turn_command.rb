@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TurnCommand
   class LEFT < BaseCommand
     def execute

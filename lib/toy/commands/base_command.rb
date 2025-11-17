@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BaseCommand
   attr_reader :robot
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "toy/commands/report_command"
 
 RSpec.describe ReportCommand do

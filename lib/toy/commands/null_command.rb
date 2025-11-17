@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class NullCommand < BaseCommand
   def execute
-    [nil, "Invalid Command"]
+    [robot, nil]
   end
 end

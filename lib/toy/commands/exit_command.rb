@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ExitCommand < BaseCommand
-  def initialize(_args)
+  def initialize(_args) # rubocop:disable Lint/MissingSuper
     @a = 1
   end
 

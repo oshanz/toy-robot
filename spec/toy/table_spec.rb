@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "toy/robot/table"
 require "toy/robot/location"
 

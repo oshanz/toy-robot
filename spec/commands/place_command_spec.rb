@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "toy/commands/place_command"
 
 RSpec.describe PlaceCommand do

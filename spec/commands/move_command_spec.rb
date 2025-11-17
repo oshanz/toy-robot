@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "toy/commands/move_command"
 
 RSpec.describe MoveCommand do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "toy/robot/direction"
 
 RSpec.describe Direction do

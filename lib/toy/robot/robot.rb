@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "location"
 require_relative "table"
 require_relative "direction"

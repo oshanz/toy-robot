@@ -23,14 +23,12 @@ class Play < Thor
   attr_reader :prompt
 
   desc "start", "create a table size 5,5"
-  def start
+  def start # rubocop:disable Metrics/MethodLength
     say("Hi! 🤠")
     loop do
       @prompt = ask("$")
-
       begin
-        robot, reply = parse_command.execute(*parse_args)
-        self.robot = robot
+        self.robot, reply = parse_command.execute(*parse_args)
         say(reply) unless reply.nil?
       rescue ValidationError => e
         say(e.message)

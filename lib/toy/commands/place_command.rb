@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlaceCommand < BaseCommand
   attr_reader :table
 
@@ -7,8 +9,8 @@ class PlaceCommand < BaseCommand
     super(robot)
   end
 
-  def execute(x, y, direction)
-    location = Location.new(x.to_i, y.to_i, table)
+  def execute(x_unit, y_unit, direction)
+    location = Location.new(x_unit.to_i, y_unit.to_i, table)
     direction = Direction.new(direction)
 
     robot.place(location, direction)

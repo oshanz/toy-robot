@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "toy/robot/location"
 
 RSpec.describe Location do
