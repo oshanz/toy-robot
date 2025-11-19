@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "toy/commands/turn_command"
 
 RSpec.describe TurnCommand do
