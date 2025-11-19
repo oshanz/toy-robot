@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "services/location_service"
+
 class Location
   attr_reader :x_unit, :y_unit, :table
 
@@ -12,16 +14,7 @@ class Location
   end
 
   def change(direction)
-    case direction.direction
-    when Direction::NORTH
-      table.north_from(self)
-    when Direction::EAST
-      table.east_from(self)
-    when Direction::WEST
-      table.west_from(self)
-    when Direction::SOUTH
-      table.south_from(self)
-    end
+    LocationService.goto_next(self, direction)
   end
 
   def report

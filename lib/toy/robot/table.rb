@@ -18,28 +18,4 @@ class Table
 
     true
   end
-
-  def north_from(location)
-    Location.new(location.x_unit, location.y_unit + 1, self)
-  rescue ValidationError
-    location
-  end
-
-  def south_from(location)
-    Location.new(location.x_unit, location.y_unit - 1, self)
-  rescue ValidationError
-    location
-  end
-
-  def west_from(location)
-    Location.new(location.x_unit - 1, location.y_unit, self)
-  rescue ValidationError
-    location
-  end
-
-  def east_from(location)
-    Location.new(location.x_unit + 1, location.y_unit, self)
-  rescue ValidationError
-    location
-  end
 end
