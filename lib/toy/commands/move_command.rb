@@ -2,6 +2,6 @@
 
 class MoveCommand < BaseCommand
   def execute
-    robot.move
+    [robot.move, nil]
   end
 end

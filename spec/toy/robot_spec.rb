@@ -69,7 +69,7 @@ RSpec.describe Toy::Robot do
     robot.move
     x, y, direction = robot.report
     expect(x).to eq(0)
-    expect(y).to eq(5)
+    expect(y).to eq(4)
     expect(direction).to eq(Direction::WEST)
   end
 
@@ -80,7 +80,7 @@ RSpec.describe Toy::Robot do
     robot.right
     robot.move
     x, y, direction = robot.report
-    expect(x).to eq(5)
+    expect(x).to eq(4)
     expect(y).to eq(0)
     expect(direction).to eq(Direction::SOUTH)
   end

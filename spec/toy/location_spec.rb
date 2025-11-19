@@ -13,5 +13,6 @@ RSpec.describe Location do
     expect { Location.new(6, 1, Table.new(5, 5)) }.to raise_error("Out of Table Bounds")
     expect { Location.new(-1, 7, Table.new(5, 5)) }.to raise_error("Out of Table Bounds")
     expect { Location.new(2, -1, Table.new(5, 5)) }.to raise_error("Out of Table Bounds")
+    expect { Location.new(5, 5, Table.new(5, 5)) }.to raise_error("Out of Table Bounds")
   end
 end

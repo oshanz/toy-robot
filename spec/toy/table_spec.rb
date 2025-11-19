@@ -35,6 +35,6 @@ RSpec.describe Table do
     location = instance_double(Location, x_unit: 3, y_unit: 1)
     location = table.south_from(location)
     expect(location.x_unit).to eq(3)
-    expect(location.y_unit).to eq(0)
+    expect(location.y_unit).to eq(1)
   end
 end

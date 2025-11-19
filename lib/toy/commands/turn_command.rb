@@ -3,13 +3,13 @@
 module TurnCommand
   class LEFT < BaseCommand
     def execute
-      robot.left
+      [robot.left, nil]
     end
   end
 
   class RIGHT < BaseCommand
     def execute
-      robot.right
+      [robot.right, nil]
     end
   end
 end
