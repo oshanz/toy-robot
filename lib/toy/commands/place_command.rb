@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class PlaceCommand < BaseCommand
-  attr_reader :table
-
   def initialize(robot)
     @errors = []
     @table = Table.new(5, 5)
@@ -16,4 +14,8 @@ class PlaceCommand < BaseCommand
     robot.place(location, direction)
     [robot, nil]
   end
+
+  private
+
+  attr_reader :table
 end

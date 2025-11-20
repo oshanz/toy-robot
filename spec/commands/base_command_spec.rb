@@ -3,6 +3,8 @@
 RSpec.shared_examples "Commands/BaseCommand" do
   it "execute should return an array" do
     expect(result).to be_an(Array)
-    # expect(result[0]).to be(an_instance_of(Robot))
+    expect(result.length).to be(2)
+    expect(result[0]).to be(robot)
+    expect(result[1]).to be_a(String).or be_nil
   end
 end
