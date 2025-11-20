@@ -11,7 +11,7 @@ class Play < Thor
   def start # rubocop:disable Metrics/MethodLength
     say("Hi! 🤠")
     loop do
-      @prompt = ask("$")
+      self.prompt = ask("$")
       begin
         self.context, reply = command.execute(*parse_args)
         say(reply) unless reply.nil?
@@ -24,8 +24,7 @@ class Play < Thor
 
   private
 
-  attr_accessor :context
-  attr_reader :prompt
+  attr_accessor :context, :prompt
 
   def parse_args
     prompt.scan(/\S+/)[1]&.split(",")
