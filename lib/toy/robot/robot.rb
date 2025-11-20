@@ -1,15 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "location"
-require_relative "table"
-require_relative "direction"
-
 class Robot
-  attr_accessor :location, :headed
-
   def place(location, direction)
-    @location = location
-    @headed = direction
+    self.location = location
+    self.headed = direction
     self
   end
 
@@ -29,10 +23,10 @@ class Robot
   end
 
   def report
-    location.report + [headed.report]
+    "#{location.report},#{headed.report}"
   end
 
-  def placed?
-    !location.nil?
-  end
+  private
+
+  attr_accessor :location, :headed
 end

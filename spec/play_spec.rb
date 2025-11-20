@@ -12,7 +12,7 @@ RSpec.describe Play do
     expect(subject).to receive(:ask).with("$").and_return("MOVE")
     expect(subject).to receive(:ask).with("$").and_return("RIGHT")
     expect(subject).to receive(:ask).with("$").and_return("REPORT")
-    expect(subject).to receive(:say).with([0, 2, "NORTH"])
+    expect(subject).to receive(:say).with("0,2,NORTH")
     expect(subject).to receive(:ask).with("$").and_return("EXIT")
     expect(subject).to receive(:say).with("See You Again! 👋😃")
     subject.start

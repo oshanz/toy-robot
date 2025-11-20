@@ -3,13 +3,13 @@
 class LocationService
   def self.goto_next(location, direction)
     case direction.direction
-    when Direction::NORTH
+    when "NORTH"
       north_from(location)
-    when Direction::EAST
+    when "EAST"
       east_from(location)
-    when Direction::WEST
+    when "WEST"
       west_from(location)
-    when Direction::SOUTH
+    when "SOUTH"
       south_from(location)
     end
   end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class MoveCommand < BaseCommand
+class TurnLeftCommand < BaseCommand
   def execute
-    robot.move
+    robot.left
     [robot, nil]
   end
 end

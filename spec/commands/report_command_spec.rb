@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "toy/commands/report_command"
-
 RSpec.describe ReportCommand do
   let(:robot) { double(report: nil) }
   subject { described_class.new(robot) }

@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "location"
-
 class Table
-  attr_reader :width, :height
-
   def initialize(width, height)
     @width = width
     @height = height
@@ -18,4 +14,8 @@ class Table
 
     true
   end
+
+  private
+
+  attr_reader :width, :height
 end

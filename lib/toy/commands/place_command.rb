@@ -4,15 +4,16 @@ class PlaceCommand < BaseCommand
   attr_reader :table
 
   def initialize(robot)
+    @errors = []
     @table = Table.new(5, 5)
     robot = Robot.new if robot.nil?
-    super(robot)
+    super
   end
 
   def execute(x_unit, y_unit, direction)
-    location = Location.new(x_unit.to_i, y_unit.to_i, table)
+    location = Location.new(x_unit, y_unit, table)
     direction = Direction.new(direction)
-
-    [robot.place(location, direction), nil]
+    robot.place(location, direction)
+    [robot, nil]
   end
 end

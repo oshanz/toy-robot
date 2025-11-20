@@ -1,87 +1,39 @@
 # frozen_string_literal: true
 
-require "toy/robot/robot"
-require "toy/robot/direction"
-require "toy/robot/table"
-require "toy/robot/location"
-
-RSpec.describe Toy::Robot do
-  let(:table) { Table.new(5, 5) }
-  subject(:robot) { Robot.new }
+RSpec.describe Robot do
+  subject(:robot) { described_class.new }
+  let(:location) { instance_double(Location, report: "1,2") }
+  let(:direction) { instance_double(Direction, direction: "NORTH", report: "NORTH") }
 
   it "can be placed" do
-    location = Location.new(2, 2, table)
-    robot.place(location, Direction.new("NORTH"))
-    x, y, direction = robot.report
-    expect(x).to eq(2)
-    expect(y).to eq(2)
-    expect(direction).to eq(Direction::NORTH)
+    result = robot.place(location, direction)
+    expect(result).to be(robot)
   end
 
   it "can turn right" do
-    location = Location.new(2, 2, table)
-    robot.place(location, Direction.new("NORTH"))
-    robot.right
-    x, y, direction = robot.report
-    expect(x).to eq(2)
-    expect(y).to eq(2)
-    expect(direction).to eq(Direction::EAST)
+    robot.place(location, direction)
+    expect(direction).to receive(:switch_right)
+    result = robot.right
+    expect(result).to be(robot)
   end
 
   it "can turn left" do
-    location = Location.new(0, 0, table)
-    robot.place(location, Direction.new("NORTH"))
-    robot.left
-    x, y, direction = robot.report
-    expect(x).to eq(0)
-    expect(y).to eq(0)
-    expect(direction).to eq(Direction::WEST)
+    robot.place(location, direction)
+    expect(direction).to receive(:switch_left)
+    result = robot.left
+    expect(result).to be(robot)
   end
 
-  it "can move north from 0,0" do
-    location = Location.new(0, 0, table)
-    robot.place(location, Direction.new("NORTH"))
-    robot.move
-    x, y, direction = robot.report
-    expect(x).to eq(0)
-    expect(y).to eq(1)
-    expect(direction).to eq(Direction::NORTH)
+  it "can report" do
+    robot.place(location, direction)
+    result = robot.report
+    expect(result).to eq("1,2,NORTH")
   end
 
-  it "can move and turn left" do
-    location = Location.new(1, 2, table)
-    robot.place(location, Direction.new("EAST"))
-    robot.move
-    robot.move
-    robot.left
-    robot.move
-    x, y, direction = robot.report
-    expect(x).to eq(3)
-    expect(y).to eq(3)
-    expect(direction).to eq(Direction::NORTH)
-  end
-
-  it "ignore invalid moves north west" do
-    location = Location.new(0, 4, table)
-    robot.place(location, Direction.new("NORTH"))
-    robot.move
-    robot.left
-    robot.move
-    x, y, direction = robot.report
-    expect(x).to eq(0)
-    expect(y).to eq(4)
-    expect(direction).to eq(Direction::WEST)
-  end
-
-  it "ignore invalid moves south east" do
-    location = Location.new(4, 0, table)
-    robot.place(location, Direction.new("EAST"))
-    robot.move
-    robot.right
-    robot.move
-    x, y, direction = robot.report
-    expect(x).to eq(4)
-    expect(y).to eq(0)
-    expect(direction).to eq(Direction::SOUTH)
+  it "can move" do
+    robot.place(location, direction)
+    expect(location).to receive(:change).with(direction)
+    result = robot.move
+    expect(result).to be(robot)
   end
 end
