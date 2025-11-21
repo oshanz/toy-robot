@@ -14,7 +14,7 @@ RSpec.describe PlaceCommand do
                                      x_unit: 1,
                                      y_unit: 3
                                    )),
-      an_instance_of(Direction).and(having_attributes(direction: "NORTH"))
+      an_instance_of(Direction).and(having_attributes(report: "NORTH"))
     ).once
     result
   end

@@ -2,16 +2,8 @@
 
 class LocationService
   def self.goto_next(location, direction)
-    case direction.direction
-    when "NORTH"
-      north_from(location)
-    when "EAST"
-      east_from(location)
-    when "WEST"
-      west_from(location)
-    when "SOUTH"
-      south_from(location)
-    end
+    method = direction.report.downcase
+    send("#{method}_from", location)
   end
 
   class << self

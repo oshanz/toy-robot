@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Direction
-  attr_accessor :direction
-
   def initialize(direction)
     @direction = direction
     raise ValidationError, "Invalid Direction" unless valid?
@@ -25,6 +23,8 @@ class Direction
   end
 
   private
+
+  attr_accessor :direction
 
   def directions
     %w[NORTH EAST SOUTH WEST]

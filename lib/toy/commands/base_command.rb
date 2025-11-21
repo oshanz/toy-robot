@@ -3,7 +3,6 @@
 class BaseCommand
   def initialize(robot)
     @robot = robot
-    @errors = []
     raise ValidationError, errors.join(", ") unless valid?
   end
 

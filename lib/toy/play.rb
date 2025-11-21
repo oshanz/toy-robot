@@ -8,16 +8,12 @@ end
 ## Toy Robot
 class Play < Thor
   desc "start", "create a table size 5,5"
-  def start # rubocop:disable Metrics/MethodLength
+  def start
     say("Hi! 🤠")
     loop do
       self.prompt = ask("$")
-      begin
-        self.context, reply = command.execute(*parse_args)
-        say(reply) unless reply.nil?
-      rescue ValidationError => e
-        say(e.message)
-      end
+      reply = execute_command
+      say(reply) unless reply.nil?
       break if parse_command == "EXIT"
     end
   end
@@ -25,6 +21,13 @@ class Play < Thor
   private
 
   attr_accessor :context, :prompt
+
+  def execute_command
+        self.context, reply = command.execute(*parse_args)
+        return reply unless reply.nil?
+  rescue StandardError => e
+        e.message
+  end
 
   def parse_args
     prompt.scan(/\S+/)[1]&.split(",")

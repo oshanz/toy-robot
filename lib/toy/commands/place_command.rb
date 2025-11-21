@@ -2,7 +2,6 @@
 
 class PlaceCommand < BaseCommand
   def initialize(robot)
-    @errors = []
     @table = Table.new(5, 5)
     robot = Robot.new if robot.nil?
     super
