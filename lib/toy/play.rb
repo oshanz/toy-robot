@@ -23,10 +23,10 @@ class Play < Thor
   attr_accessor :context, :prompt
 
   def execute_command
-        self.context, reply = command.execute(*parse_args)
-        return reply unless reply.nil?
+    self.context, reply = command.execute(*parse_args)
+    reply unless reply.nil?
   rescue StandardError => e
-        e.message
+    e.message
   end
 
   def parse_args
