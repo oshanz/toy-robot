@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
-require "toy/robot/location"
-
 RSpec.describe Location do
-  let(:table) { Table.new(5, 5) }
+  let(:table) { instance_double(Table, placeable?: true) }
+  let(:location) { described_class.new(2, 1, table) }
+  let(:direction) { instance_double(Direction) }
   it "report coordinates" do
-    location = Location.new(2, 1, table)
     expect(location.report).to eq("2,1")
   end
 
+  it "change location" do
+    expect(LocationService).to receive(:goto_next).with(location, direction).and_return(location)
+    result = location.change(direction)
+    expect(result).to be(location)
+  end
+
   it "raise Error when location out of table bounds" do
+    allow(table).to receive(:placeable?).and_return(false)
     expect { Location.new(2, 7, table) }.to raise_error("Out of Table Bounds")
-    expect { Location.new(6, 1, table) }.to raise_error("Out of Table Bounds")
-    expect { Location.new(-1, 7, table) }.to raise_error("Out of Table Bounds")
-    expect { Location.new(2, -1, table) }.to raise_error("Out of Table Bounds")
-    expect { Location.new(5, 5, table) }.to raise_error("Out of Table Bounds")
   end
 
   it "raise an error on invalid coordinates" do

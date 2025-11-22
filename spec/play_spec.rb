@@ -17,4 +17,24 @@ RSpec.describe Play do
     expect(subject).to receive(:say).with("See You Again! 👋😃")
     subject.start
   end
+
+  it "support lowercase commands" do
+    expect(subject).to receive(:say).with("Hi! 🤠")
+    expect(subject).to receive(:ask).with("$").and_return("place 1,2,west")
+    expect(subject).to receive(:ask).with("$").and_return("report")
+    expect(subject).to receive(:say).with("1,2,WEST")
+    expect(subject).to receive(:ask).with("$").and_return("exit")
+    expect(subject).to receive(:say).with("See You Again! 👋😃")
+    subject.start
+  end
+
+  it "says errors and ignore invalid commands" do
+    expect(subject).to receive(:say).with("Hi! 🤠")
+    expect(subject).to receive(:ask).with("$").and_return("place 1")
+    expect(subject).to receive(:say).with("wrong number of arguments (given 1, expected 3)")
+    expect(subject).to receive(:ask).with("$").and_return("kill robot")
+    expect(subject).to receive(:ask).with("$").and_return("exit")
+    expect(subject).to receive(:say).with("See You Again! 👋😃")
+    subject.start
+  end
 end

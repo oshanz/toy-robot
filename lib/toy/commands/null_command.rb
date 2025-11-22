@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NullCommand < BaseCommand
-  def execute
+  def execute(_args = nil)
     [robot, nil]
   end
 

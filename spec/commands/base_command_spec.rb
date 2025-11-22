@@ -8,3 +8,11 @@ RSpec.shared_examples "Commands/BaseCommand" do
     expect(result[1]).to be_a(String).or be_nil
   end
 end
+
+RSpec.describe BaseCommand do
+  let(:robot) { nil }
+  subject { described_class.new(robot) }
+  it "raise validation error when robot not provided" do
+    expect { subject }.to raise_error(ValidationError, "Robot was not placed")
+  end
+end

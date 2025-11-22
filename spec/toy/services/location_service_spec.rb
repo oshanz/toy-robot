@@ -1,35 +1,24 @@
 # frozen_string_literal: true
 
 RSpec.describe LocationService do
-  it "2,3 north from 7,7 table is 2,4" do
-    table = Table.new(7, 7)
-    location = instance_double(Location, x_unit: 2, y_unit: 3, table:)
-    location = described_class.goto_next(location, Direction.new("NORTH"))
-    expect(location.x_unit).to eq(2)
-    expect(location.y_unit).to eq(4)
+  let(:table) { instance_double(Table) }
+  let(:location) { instance_double(Location, x_unit: 2, y_unit: 2, table:) }
+  let(:direction) { instance_double(Direction) }
+  it "returns next location" do
+    allow(table).to receive(:placeable?).and_return(true)
+    [["NORTH", 2, 3], ["EAST", 3, 2], ["WEST", 1, 2], ["SOUTH", 2, 1]].each do |position|
+      allow(direction).to receive(:report).and_return(position[0])
+      result = described_class.goto_next(location, direction)
+      expect(result).to be_a(Location).and have_attributes(x_unit: position[1], y_unit: position[2], table:)
+    end
   end
 
-  it "3,3, start 3,1 south is 3,1" do
-    table = Table.new(3, 3)
-    location = instance_double(Location, x_unit: 3, y_unit: 1, table:)
-    location = described_class.goto_next(location, Direction.new("SOUTH"))
-    expect(location.x_unit).to eq(3)
-    expect(location.y_unit).to eq(1)
-  end
-
-  it "Table 3,3, from position 0,0, EAST is 0,0" do
-    table = Table.new(3, 3)
-    location = instance_double(Location, x_unit: 2, y_unit: 0, table:)
-    location = described_class.goto_next(location, Direction.new("EAST"))
-    expect(location.x_unit).to eq(2)
-    expect(location.y_unit).to eq(0)
-  end
-
-  it "Table 3,3, from position 0,0, EAST is 0,0" do
-    table = Table.new(3, 3)
-    location = instance_double(Location, x_unit: 2, y_unit: 0, table:)
-    location = described_class.goto_next(location, Direction.new("WEST"))
-    expect(location.x_unit).to eq(1)
-    expect(location.y_unit).to eq(0)
+  it "returns same location when reached the boundary" do
+    allow(table).to receive(:placeable?).and_return(false)
+    %w[NORTH EAST WEST SOUTH].each do |headed|
+      allow(direction).to receive(:report).and_return(headed)
+      result = described_class.goto_next(location, direction)
+      expect(result).to be(location)
+    end
   end
 end

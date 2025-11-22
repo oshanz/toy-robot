@@ -30,7 +30,7 @@ class Play < Thor
   end
 
   def parse_args
-    prompt.scan(/\S+/)[1]&.split(",")
+    prompt.scan(/\S+/)[1]&.upcase&.split(",")
   end
 
   def parse_command

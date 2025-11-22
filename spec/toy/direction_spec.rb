@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "toy/robot/direction"
-
 RSpec.describe Direction do
   it "return left from north" do
     direction = Direction.new("NORTH")
