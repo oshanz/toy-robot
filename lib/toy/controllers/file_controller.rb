@@ -6,22 +6,28 @@ class FileController
   def process(path)
     return "File NotFound" unless File.exist?(path)
 
-    File.foreach(path) do |line|
-      self.line = line
-      reply = super
-      yield(reply) unless reply.nil?
-    end
+    self.path = path
+    super
   end
 
   private
 
-  attr_accessor :line, :path
+  attr_accessor :path
 
-  def args
+  def args(line)
     line.scan(/\S+/)[1]&.upcase&.split(",")
   end
 
-  def command
+  def command(line)
     line.scan(/\S+/)[0].upcase
+  end
+
+  def commands
+    File.foreach(path).map do |line|
+      {
+        command: command(line),
+        args: args(line)
+      }
+    end
   end
 end

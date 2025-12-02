@@ -19,4 +19,16 @@ class CliController
   def args
     prompt.scan(/\S+/)[1]&.upcase&.split(",")
   end
+
+  def commands
+    [
+      { command:, args: }
+    ]
+  end
+
+  def local_commands_map
+    {
+      "EXIT" => ExitCommand
+    }
+  end
 end

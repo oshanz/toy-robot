@@ -4,7 +4,7 @@ require_relative "lib/toy/robot/version"
 
 Gem::Specification.new do |spec|
   spec.name = "toy-robot"
-  spec.version = Toy::Robot::VERSION
+  spec.version = Version::VERSION
   spec.authors = ["Oshan Wisumperuma"]
   spec.email = ["warunaoshan@gmail.com"]
 

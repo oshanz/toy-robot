@@ -2,19 +2,25 @@
 
 module Commandable
   def process(_arg)
-    self.state, reply = commands.fetch(command, invalid_command).new(state).execute(*args)
-    reply
+    commands.each do |hash|
+      hash => { command:, args: }
+      self.state, reply = commands_map.fetch(command, invalid_command).new(state).execute(*args)
+      next if reply.nil?
+      return reply unless block_given?
+
+      yield(reply)
+    end
+    nil
   end
 
-  def commands
+  def commands_map
     {
       "PLACE" => PlaceCommand,
       "MOVE" => MoveCommand,
       "LEFT" => TurnLeftCommand,
       "RIGHT" => TurnRightCommand,
-      "REPORT" => ReportCommand,
-      "EXIT" => ExitCommand
-    }
+      "REPORT" => ReportCommand
+    }.merge(local_commands_map)
   end
 
   def invalid_command
@@ -25,11 +31,11 @@ module Commandable
 
   attr_accessor :state
 
-  def command
-    raise NotImplementedError
+  def local_commands_map
+    {}
   end
 
-  def args
+  def commands
     raise NotImplementedError
   end
 end
