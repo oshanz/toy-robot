@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-require "toy/play"
-
-Dir.glob("./lib/**/*.rb").each do |file|
-  require file
-end
+require "toy"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

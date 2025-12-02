@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "toy/play"
-
 RSpec.describe Play do
   subject { described_class.new }
   let(:context) { double }

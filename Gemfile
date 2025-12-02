@@ -14,3 +14,5 @@ gem "rubocop", "~> 1.21"
 gem "byebug", "~> 11.1"
 
 gem "thor", "~> 1.2", ">= 1.2.1"
+
+gem "zeitwerk", "~> 2.7"

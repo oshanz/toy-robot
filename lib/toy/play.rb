@@ -7,44 +7,40 @@ end
 
 ## Toy Robot
 class Play < Thor
-  desc "start", "create a table size 5,5"
+  desc "interactive game", ""
   def start
+    self.cli_controller = CliController.new
     say("Hi! 🤠")
     loop do
-      self.prompt = ask("$")
-      reply = execute_command
+      prompt = ask("$")
+      reply = execute_command(prompt)
       say(reply) unless reply.nil?
-      break if parse_command == "EXIT"
+      break if prompt.upcase == "EXIT"
     end
+  end
+
+  desc "file read game", ""
+  def read
+    self.file_controller = FileController.new
+    path = ask("file path?")
+    reply = process_file(path) do |out|
+      say(out)
+    end
+    say(reply) unless reply.nil?
   end
 
   private
 
-  attr_accessor :context, :prompt
+  attr_accessor :cli_controller, :file_controller
 
-  def execute_command
-    self.context, reply = command.execute(*parse_args)
+  def execute_command(prompt)
+    reply = cli_controller.process(prompt)
     reply unless reply.nil?
   rescue StandardError => e
     e.message
   end
 
-  def parse_args
-    prompt.scan(/\S+/)[1]&.upcase&.split(",")
-  end
-
-  def parse_command
-    prompt.scan(/\S+/)[0].upcase
-  end
-
-  def command
-    {
-      "PLACE" => PlaceCommand,
-      "MOVE" => MoveCommand,
-      "LEFT" => TurnLeftCommand,
-      "RIGHT" => TurnRightCommand,
-      "REPORT" => ReportCommand,
-      "EXIT" => ExitCommand
-    }.fetch(parse_command, NullCommand).new(context)
+  def process_file(path, &)
+    file_controller.process(path, &)
   end
 end

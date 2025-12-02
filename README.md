@@ -2,8 +2,18 @@
 
 ## How to play
 
+### interactive
+
 - mise install
+- bundle install
 - ./play.rb start
+
+### from file
+
+- mise install
+- bundle install
+- ./play.rb read
+- (sample.cd)
 
 ### run unit tests
 
