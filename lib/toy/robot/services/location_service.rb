@@ -10,27 +10,19 @@ class LocationService
     private
 
     def north_from(location)
-      Location.new(location.x_unit, location.y_unit + 1, location.table)
-    rescue ValidationError
-      location
+      location.y_unit += 1
     end
 
     def south_from(location)
-      Location.new(location.x_unit, location.y_unit - 1, location.table)
-    rescue ValidationError
-      location
+      location.y_unit -= 1
     end
 
     def west_from(location)
-      Location.new(location.x_unit - 1, location.y_unit, location.table)
-    rescue ValidationError
-      location
+      location.x_unit -= 1
     end
 
     def east_from(location)
-      Location.new(location.x_unit + 1, location.y_unit, location.table)
-    rescue ValidationError
-      location
+      location.x_unit += 1
     end
   end
 end

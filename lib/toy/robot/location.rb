@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
-require_relative "services/location_service"
-
 class Location
-  attr_reader :table
+  attr_reader :table, :x_unit, :y_unit
 
   def initialize(x_arg, y_arg, table)
-    @x_arg = x_arg
-    @y_arg = y_arg
+    raise ValidationError, errors.join(", ") unless valid?(x_arg, y_arg, table)
+
+    @x_unit = x_arg.to_i
+    @y_unit = y_arg.to_i
     @table = table
-    raise ValidationError, errors.join(", ") unless valid?
   end
 
   def change(direction)
@@ -20,23 +19,22 @@ class Location
     "#{x_unit},#{y_unit}"
   end
 
-  def x_unit
-    x_arg.to_i
+  def x_unit=(value)
+    @x_unit = value if valid?(value, y_unit, table)
   end
 
-  def y_unit
-    y_arg.to_i
+  def y_unit=(value)
+    @y_unit = value if valid?(value, y_unit, table)
   end
 
   private
 
-  attr_reader :x_arg, :y_arg
   attr_accessor :errors
 
-  def valid?
+  def valid?(x_arg, y_arg, table)
     self.errors = []
     errors << "coordinates must be numbers" if !integer?(x_arg) || !integer?(y_arg)
-    errors << "Out of Table Bounds" unless table.placeable?(self)
+    errors << "Out of Table Bounds" unless table.placeable?(x_arg.to_i, y_arg.to_i)
     errors.empty?
   end
 

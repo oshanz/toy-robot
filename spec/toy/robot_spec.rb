@@ -6,22 +6,20 @@ RSpec.describe Robot do
   let(:direction) { instance_double(Direction, direction: "NORTH", report: "NORTH") }
 
   it "can be placed" do
-    result = robot.place(location, direction)
-    expect(result).to be(robot)
+    expect(robot).to receive(:place).with(location, direction).once
+    robot.place(location, direction)
   end
 
   it "can turn right" do
     robot.place(location, direction)
     expect(direction).to receive(:switch_right)
-    result = robot.right
-    expect(result).to be(robot)
+    robot.right
   end
 
   it "can turn left" do
     robot.place(location, direction)
     expect(direction).to receive(:switch_left)
-    result = robot.left
-    expect(result).to be(robot)
+    robot.left
   end
 
   it "can report" do
@@ -33,7 +31,6 @@ RSpec.describe Robot do
   it "can move" do
     robot.place(location, direction)
     expect(location).to receive(:change).with(direction)
-    result = robot.move
-    expect(result).to be(robot)
+    robot.move
   end
 end

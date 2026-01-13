@@ -25,4 +25,19 @@ RSpec.describe Location do
     expect { Location.new("x", "c", table) }.to raise_error(ValidationError, "coordinates must be numbers")
     expect { Location.new(nil, 3, table) }.to raise_error(ValidationError, "coordinates must be numbers")
   end
+
+  it "allowed to change the location" do
+    location.x_unit += 1
+    location.y_unit += 1
+    expect(location.x_unit).to be(3)
+    expect(location.y_unit).to be(2)
+  end
+
+  it "prevent moving outside boundaries" do
+    location.x_unit += 4
+    allow(table).to receive(:placeable?).and_return(false)
+    location.y_unit += 5
+    expect(location.x_unit).to be(6)
+    expect(location.y_unit).to be(1)
+  end
 end
