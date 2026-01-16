@@ -28,7 +28,8 @@ class CliController
 
   def local_commands_map
     {
-      "EXIT" => ExitCommand
+      "EXIT" => ExitCommand,
+      "RESET" => ResetCommand
     }
   end
 end

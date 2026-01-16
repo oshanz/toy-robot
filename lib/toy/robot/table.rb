@@ -6,11 +6,11 @@ class Table
     @height = height
   end
 
-  def placeable?(location)
-    return false if location.x_unit >= width
-    return false if location.y_unit >= height
-    return false if location.x_unit.negative?
-    return false if location.y_unit.negative?
+  def placeable?(x_unit, y_unit)
+    return false if x_unit.negative?
+    return false if y_unit.negative?
+    return false if x_unit >= width
+    return false if y_unit >= height
 
     true
   end
